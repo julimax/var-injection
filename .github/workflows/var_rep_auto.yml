@@ -54,7 +54,6 @@ jobs:
             echo "$rep_name"
             echo "${{ env.OWNER }}"
             echo "${{ matrix.repositorie }}"
-            echo "${{ env.USER }}"
             
             response=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ env.GH_TOKEN }}" "https://api.github.com/repos/${{ env.OWNER }}/${{ matrix.repositorie }}")
 
@@ -65,58 +64,6 @@ jobs:
               echo "Error: El repositorio ${{ env.OWNER }}/${{ matrix.repositorie }} no existe."
               exit 1  # Salir con un código de error
             fi
-
-            git clone https://${{ env.USER }}:${{ env.GH_TOKEN }}@github.com/${{ env.OWNER }}/${{ matrix.repositorie }}.git
-            ls
-            cd ${{ matrix.repositorie }}
-            # Nombre de la rama remota a verificar
-            REMOTE_BRANCH="bamboo-specs"
-            
-            # Verificar si la rama remota existe
-            if git ls-remote --exit-code --heads origin "$REMOTE_BRANCH" >/dev/null 2>&1; then
-                echo "La rama remota '$REMOTE_BRANCH' existe."
-                # Hacer checkout a la rama remota
-                git checkout "origin/$REMOTE_BRANCH"
-                
-                # Hacer un pull para asegurarse de tener la última versión de la rama
-                git fetch origin
-                git reset --hard origin/bamboo-specs
-
-                tree
-                # Mostrar el contenido del archivo plan.yaml y guardar las variables NAMESPACE y exclusions
-                #output=$(cat ./bamboo-specs/build/plan.yaml)
-                file="./bamboo-specs/build/plan.yaml"
-                if [ -f "$file" ]; then
-                    output=$(cat "$file")
-                else
-                    echo "El archivo $file no existe."
-                fi
-                NAMESPACE=$(echo "$output" | grep -oP 'NAMESPACE:\s*\K\S+' || echo "default")
-                exclusions=$(grep -oP 'exclusions:\s*\K.*' <<< "$output" | tr -d ' ' || echo "vacio")
-                
-
-                # Escapar los caracteres especiales en la variable exclusions
-                exclusions_escaped=$(echo "$exclusions" | jq -sRr @json)
-
-
-            else
-                echo "La rama remota '$REMOTE_BRANCH' no existe."
-            fi
-
-            # Verificar si la variable exclusion está vacía
-            if [ -z "$exclusion" ]; then
-                exclusion="default"
-            fi
-            
-            echo "El valor de exclusion es: $exclusion"
-
-            # Verificar si la variable exclusion está vacía
-            if [ -z "$NAMESPACE" ]; then
-                exclusion="default"
-            fi
-            
-            echo "El valor de NAMESPACE es: $NAMESPACE"
-
 
             cd ..
             # Enviar la variable exclusions a GitHub Actions

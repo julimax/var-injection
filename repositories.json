@@ -1,6 +1,5 @@
 {
     "owner": "BancoBice",
-    "user": "rmgarciaex_bice",
     "repositories": [
         {"repo_name": "SISGOBICE-wl-cuenta-digital-servicios"},
         {"repo_name": "SISGOBICE-wl-go-bice"}
