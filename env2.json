@@ -1,0 +1,19 @@
+[
+    {
+      "name_env": "dev",
+      "body_parameters": [],
+      "variables": [
+        {"name": "GKE_ENVIRONMENT", "value": "develop"}
+       
+      ]
+    },
+    {
+      "name_env": "qa",
+      "body_parameters": [],
+      "variables": [
+        {"name": "GKE_ENVIRONMENT", "value": "qa"}
+       
+      ]
+    }
+  ]
+  

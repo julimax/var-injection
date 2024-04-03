@@ -1,0 +1,12 @@
+{
+    "variables": [
+        {"name": "APPNAME", "value": "app-name"},
+        {"name": "REPLICAS", "value": "1"},
+        {"name": "MAX_REPLICAS", "value": "2"},
+        {"name": "PLATFORM", "value": "MAVEN"},
+        {"name": "SKIP_SONAR", "value": "false"},
+        {"name": "IMAGE_PULL", "value": "gcr-secret"},
+        {"name": "PROJECTKEY", "value": "projectkey"}
+      ]    
+}
+  
