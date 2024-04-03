@@ -22,6 +22,21 @@ Este archivo contiene las variables de entorno que serán inyectadas por `var_en
 #### `var_rep.json`
 Este archivo contiene las variables que serán inyectadas por `var_rep_auto.yml`. Cada objeto en el array debe tener un campo `name` (el nombre de la variable) y un campo `value` (el valor de la variable).
 
+## Variables APPNAME Y PROJECTKEY
+Este código es parte de un script de GitHub Actions. Verifica si el valor del campo "name" es igual a "APPNAME" o "PROJECTKEY". Si es así, establece el valor del elemento actual en la "matriz" al valor de la variable correspondiente. Utiliza el comando jq para procesar y modificar los objetos JSON.
+
+```bash
+# Verifica si el valor del campo "name" es igual a "APPNAME"
+if [ "$name" == "APPNAME" ]; then
+    # Si es igual, establece el valor en "matrix"
+    current_element=$(jq --arg project_name "$rep_name" '.value = $project_name' <<< "$current_element")
+fi
+
+# Verifica si el valor del campo "name" es igual a "PROJECTKEY"
+if [ "$name" == "PROJECTKEY" ]; then
+    # Si es igual, establece el valor en "matrix"
+    current_element=$(jq --arg project_name "$project_name" '.value = $project_name' <<< "$current_element")
+fi
 
 ## Consideraciones de seguridad
 
