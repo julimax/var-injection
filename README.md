@@ -1,4 +1,3 @@
-ENV_injection
 ## 🤖 Este repositorio está diseñado para automatizar el proceso de inyección de variables de entorno y variables de repositorio. Utiliza flujos de trabajo de GitHub Actions para realizar las tareas.
 
 ### 📁 Estructura de archivos
