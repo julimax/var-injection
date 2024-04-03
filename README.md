@@ -1,5 +1,5 @@
 ENV_injection
-## 🤖 Este repositorio está diseñado para automatizar el proceso de inyección de variables de entorno en repositorios de GitHub. Utiliza flujos de trabajo de GitHub Actions para realizar las tareas.
+## 🤖 Este repositorio está diseñado para automatizar el proceso de inyección de variables de entorno y variables de repositorio. Utiliza flujos de trabajo de GitHub Actions para realizar las tareas.
 
 ### 📁 Estructura de archivos
 - `.github/workflows/var_env.yml`: Este flujo de trabajo lee variables de entorno de `env.json` e inyecta en el entorno del repositorio de GitHub especificado.
